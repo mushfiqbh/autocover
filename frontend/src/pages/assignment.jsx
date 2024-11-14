@@ -47,9 +47,9 @@ const Assignment = () => {
     e.preventDefault();
 
     axios
-      .post("http://127.0.0.1:5000/create-pdf", formData)
+      .post("https://autocover-backend.onrender.com/create-pdf", formData)
       .then(() =>
-        axios.get("http://127.0.0.1:5000/fetch-pdf", { responseType: "blob" })
+        axios.get("https://autocover-backend.onrender.com/fetch-pdf", { responseType: "blob" })
       )
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
