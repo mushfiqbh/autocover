@@ -23,7 +23,7 @@ module.exports = (data) => {
             .page {
             color: #1A1A1A;
             background-color: #fff;
-            font-size: 20px;
+            font-size: 12px;
             padding-top: 6rem;
             text-align: center;
             }
@@ -64,7 +64,7 @@ module.exports = (data) => {
             .heading {
             text-align: center;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 16px;
             }
 
             .image {
@@ -77,8 +77,8 @@ module.exports = (data) => {
   <div class="page">
     <div class="section">
       <img class="image" src="https://i.ibb.co.com/cYMTmCT/Leading-University-Logo.png" alt="Leading University Logo">
-      <p style="font-size: 2rem; margin-top: 10px;">Leading University</p>
-      <p style="font-size: 1.8rem;">${data.student.dept}</p>
+      <p style="font-size: 1rem; margin-top: 10px;">Leading University</p>
+      <p style="font-size: 0.8rem;">${data.student.dept}</p>
     </div>
 
     <table>
