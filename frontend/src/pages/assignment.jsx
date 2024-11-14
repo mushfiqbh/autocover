@@ -47,9 +47,11 @@ const Assignment = () => {
     e.preventDefault();
 
     axios
-      .post("https://autocover-backend.onrender.com/create-pdf", formData)
+      .post(import.meta.env.VITE_BACKEND_URL + "/create-pdf", formData)
       .then(() =>
-        axios.get("https://autocover-backend.onrender.com/fetch-pdf", { responseType: "blob" })
+        axios.get(import.meta.env.VITE_BACKEND_URL + "/fetch-pdf", {
+          responseType: "blob",
+        })
       )
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });

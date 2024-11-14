@@ -17,7 +17,7 @@ module.exports = (data) => {
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: 'Calibri', serif;
+            font-family: "Geist Sans", serif;
             }
 
             .page {
