@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/assignment.css";
 import { faculties } from "../assets/data";
-import axios from "axios";
-import { saveAs } from "file-saver";
+// import axios from "axios";
+// import { saveAs } from "file-saver";
 
 const Assignment = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     course: {
       code: "EEE-2111",
@@ -43,21 +45,25 @@ const Assignment = () => {
     }
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(import.meta.env.VITE_BACKEND_URL + "/create-pdf", formData)
+  //     .then(() =>
+  //       axios.get(import.meta.env.VITE_BACKEND_URL + "/fetch-pdf", {
+  //         responseType: "blob",
+  //       })
+  //     )
+  //     .then((res) => {
+  //       const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+
+  //       saveAs(pdfBlob, "newPdf.pdf");
+  //     });
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    axios
-      .post(import.meta.env.VITE_BACKEND_URL + "/create-pdf", formData)
-      .then(() =>
-        axios.get(import.meta.env.VITE_BACKEND_URL + "/fetch-pdf", {
-          responseType: "blob",
-        })
-      )
-      .then((res) => {
-        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-
-        saveAs(pdfBlob, "newPdf.pdf");
-      });
+    navigate("/builder", { state: formData });
   };
 
   return (
