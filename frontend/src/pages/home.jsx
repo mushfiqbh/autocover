@@ -79,9 +79,20 @@ const Home = () => {
   };
 
   const print = () => {
-    html2canvas(document.querySelector(".page")).then((canvas) => {
+    const page = document.querySelector(".page");
+    html2canvas(page, {
+      width: page.scrollWidth,
+      height: page.scrollHeight,
+    }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      doc.addImage(imgData, "PNG", 10, 10);
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: [canvas.width, canvas.height],
+      });
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
       doc.save("a4.pdf");
     });
   };
