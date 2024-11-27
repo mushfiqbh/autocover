@@ -62,6 +62,7 @@ const Home = () => {
     },
     heading: {
       textAlign: "center",
+fontFamily: "Times-bold",
       fontWeight: "bold",
       fontSize: "20px",
     },
