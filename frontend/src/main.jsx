@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import ContextAPIProvider from "./lib/contextAPI.jsx";
+import FormContextProvider from "./lib/formContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ContextAPIProvider>
+    <FormContextProvider>
       <App />
-    </ContextAPIProvider>
+    </FormContextProvider>
   </StrictMode>
 );

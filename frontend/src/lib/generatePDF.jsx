@@ -33,7 +33,7 @@ const generatePDF = (data) => {
   const courseInfo = [
     ["Course Code", data.course.code],
     ["Course Title", data.course.title],
-    ["Assignment Title", data.title + " (" + data.number + ")"],
+    ["Assignment Title", data.title],
   ];
   let courseInfoEnd = courseInfo.length;
 
@@ -70,7 +70,7 @@ const generatePDF = (data) => {
   const teacherInfo = [
     ["Name", data.teacher.name],
     ["Designation", data.teacher.designation],
-    ["Faculty", data.teacher.faculty],
+    ["Faculty", "Dept. of " + data.teacher.faculty],
   ];
 
   doc.setFont("helvetica", "normal");

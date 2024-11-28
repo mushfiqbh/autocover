@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ContextAPI } from "../lib/contextAPI";
 import generatePDF from "../lib/generatePDF";
+import { FormContext } from "../lib/contextAPI";
 
 const Builder = () => {
-  const { formData } = useContext(ContextAPI);
+  const { formData } = useContext(FormContext);
 
   const styles = {
     page: {

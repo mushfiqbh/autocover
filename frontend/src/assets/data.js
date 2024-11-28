@@ -5,19 +5,55 @@ export const faculties = [
   },
   {
     code: "EEE",
-    name: "Electronics And Electrical Engineering",
+    name: "Electrical And Electronics Engineering",
   },
   {
-    code: "ECE",
-    name: "Electronics And Communication Engineering",
+    code: "BBA",
+    name: "Business Administration",
   },
   {
-    code: "ME",
-    name: "Mechanical Engineering",
+    code: "ARCH",
+    name: "Department of Architecture",
   },
   {
-    code: "CE",
-    name: "Civil Engineering",
+    code: "Law",
+    name: "Department of Law",
+  },
+  {
+    code: "English",
+    name: "Department of English",
+  },
+  {
+    code: "Bangla",
+    name: "Department of Bangla",
+  },
+  {
+    code: "Islamic",
+    name: "Department of Islamic Studies",
+  },
+  {
+    code: "Health",
+    name: "Department of Public Health",
+  },
+  {
+    code: "Tourism",
+    name: "Tourism and Hospitality Management",
+  },
+  {
+    code: "Arts",
+    name: "Arts and Modern Language",
+  },
+  {
+    code: "Social",
+    name: "Department of Social Science",
+  },
+  {
+    code: "Science",
+    name: "Department of Modern Science",
+  },
+  {
+    code: "Accounting",
+    name: "Accounting and Business Management",
   },
 ];
 
@@ -45,4 +81,19 @@ export const teachers = [
     faculty: "EEE",
     designation: "Lecturer",
   },
+];
+
+export const designations = [
+  "Lecturer",
+  "Adjunct Lecturer",
+  "Part Time Lecturer",
+  "Instructor",
+  "Professor",
+  "Adjunct Faculty",
+  "Adjunct Professor",
+  "Assistant Professor",
+  "Adjunct Assistant Professor",
+  "Associate Professor",
+  "Clinical Professor",
+  "Department Head",
 ];
