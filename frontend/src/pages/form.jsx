@@ -1,37 +1,16 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/assignment.css";
 import { faculties } from "../assets/data";
-// import axios from "axios";
-// import { saveAs } from "file-saver";
+import { useContext } from "react";
+import { ContextAPI } from "../lib/contextAPI";
+import "../styles/form.css";
 
-const Assignment = () => {
+const Form = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    course: {
-      code: "EEE-2111",
-      title: "Electrconic Devices And Circuits",
-    },
-    teacher: {
-      name: "Bidyut Kanthi Nath",
-      faculty: "EEE",
-      designation: "Lecturer",
-    },
-    student: {
-      id: "0182320012101295",
-      name: "Md. Mushfiqur Rahman",
-      batch: "62",
-      section: "G",
-      dept: "Computer Science And Engineering",
-    },
-    date: new Date().toISOString().split("T")[0],
-    title: "Characteristics of Transistors",
-  });
+  const { formData, setFormData } = useContext(ContextAPI);
 
   const handleChange = (ev, where) => {
     const name = ev.target.name;
     const value = ev.target.value;
-
     if (where === "") {
       setFormData({
         ...formData,
@@ -45,32 +24,16 @@ const Assignment = () => {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(import.meta.env.VITE_BACKEND_URL + "/create-pdf", formData)
-  //     .then(() =>
-  //       axios.get(import.meta.env.VITE_BACKEND_URL + "/fetch-pdf", {
-  //         responseType: "blob",
-  //       })
-  //     )
-  //     .then((res) => {
-  //       const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-
-  //       saveAs(pdfBlob, "newPdf.pdf");
-  //     });
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/builder", { state: formData });
+    navigate("/builder");
   };
 
   return (
     <div className="assignment">
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label>Assignment Title & Date</label>
+          <label>Form Title & Date</label>
           <input
             type="text"
             name="title"
@@ -182,4 +145,4 @@ const Assignment = () => {
   );
 };
 
-export default Assignment;
+export default Form;

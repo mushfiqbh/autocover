@@ -1,97 +1,140 @@
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  Image,
-  PDFViewer,
-} from "@react-pdf/renderer";
-import lulogo from "../assets/lulogo.png";
-import { styles } from "../assets/data";
-// import { PDFViewer } from "pdfjs-dist/web/pdf_viewer";
-// import { useState } from "react";
+import { useContext } from "react";
+import { ContextAPI } from "../lib/contextAPI";
+import generatePDF from "../lib/generatePDF";
 
-const MyDoc = ({ data }) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Image style={styles.image} src={lulogo} />
-        <Text style={{ fontSize: "20px", marginTop: 10 }}>
-          Leading University
-        </Text>
-        <Text style={{ fontSize: "16px" }}>{data.student.dept}</Text>
-      </View>
+const Builder = () => {
+  const { formData } = useContext(ContextAPI);
 
-      <View style={styles.section}>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Course Code</Text>
-          <Text style={styles.right}>{data.course.code}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Course Title</Text>
-          <Text style={styles.right}>{data.course.title}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Assignment Title</Text>
-          <Text style={styles.right}>{data.title}</Text>
-        </View>
-      </View>
+  const styles = {
+    page: {
+      color: "#1A1A1A",
+      backgroundColor: "#fff",
+      fontSize: "20px",
+      paddingTop: "6rem",
+      textAlign: "center",
+      fontFamily: "Calibri, Geist-Sans, serif",
+    },
+    section: {
+      margin: "80px 0",
+      textAlign: "center",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      rowGap: "5px",
+    },
+    table: {
+      width: "100%",
+      marginBottom: "100px",
+      borderCollapse: "separate",
+      borderSpacing: "0 10px",
+    },
+    tr: {
+      width: "100%",
+    },
+    tdFirstChild: {
+      width: "40%",
+      fontWeight: "bold",
+      textAlign: "right",
+    },
+    tdSecondChild: {
+      width: "60%",
+      textAlign: "center",
+      paddingLeft: "1.5rem",
+      paddingRight: "10rem",
+    },
+    heading: {
+      textAlign: "center",
+      fontFamily: "Calibri-Bold",
+      fontWeight: "bold",
+      fontSize: "20px",
+    },
+    image: {
+      width: "160px",
+      height: "160px",
+    },
+  };
 
-      <Text style={styles.heading}>Submitted To</Text>
-
-      <View style={styles.section}>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Name</Text>
-          <Text style={styles.right}>{data.teacher.name}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Designation</Text>
-          <Text style={styles.right}>{data.teacher.designation}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Faculty</Text>
-          <Text style={styles.right}>{data.teacher.faculty}</Text>
-        </View>
-      </View>
-
-      <Text style={styles.heading}>Submitted By</Text>
-
-      <View style={styles.section}>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Name</Text>
-          <Text style={styles.right}>{data.student.name}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Batch</Text>
-          <Text style={styles.right}>{data.student.batch}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>Section</Text>
-          <Text style={styles.right}>{data.student.section}</Text>
-        </View>
-        <View style={styles.flexbox}>
-          <Text style={styles.left}>ID</Text>
-          <Text style={styles.right}>{data.student.id}</Text>
-        </View>
-      </View>
-
-      <Text style={styles.heading}>
-        Submission Date:{" "}
-        {new Date(data.date)
-          .toISOString()
-          .split("T")[0]
-          .replace(/\//g, "-")}
-      </Text>
-    </Page>
-  </Document>
-);
-
-const Builder = ({ data }) => {
   return (
     <div>
-      <PDFViewer style={styles.viewer}>
-        <MyDoc data={data} />
-      </PDFViewer>
+      <div>
+        <button onClick={() => generatePDF(formData)}>Print</button>
+      </div>
+      <div style={styles.page} className="docs">
+        <div style={styles.section}>
+          <img
+            style={styles.image}
+            src="https://i.ibb.co.com/cYMTmCT/Leading-University-Logo.png"
+            alt="Leading University Logo"
+          />
+          <p style={{ fontSize: "2rem", marginTop: "10px" }}>
+            Leading University
+          </p>
+          <p style={{ fontSize: "1.8rem" }}>{formData.student.dept}</p>
+        </div>
+        <table style={styles.table}>
+          <tbody>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Course Code</td>
+              <td style={styles.tdSecondChild}>{formData.course.code}</td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Course Title</td>
+              <td style={styles.tdSecondChild}>{formData.course.title}</td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Assignment Title</td>
+              <td style={styles.tdSecondChild}>{formData.title}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={styles.heading}>Submitted To</p>
+        <table style={styles.table}>
+          <tbody>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Name</td>
+              <td style={styles.tdSecondChild}>{formData.teacher.name}</td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Designation</td>
+              <td style={styles.tdSecondChild}>
+                {formData.teacher.designation}
+              </td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Faculty</td>
+              <td style={styles.tdSecondChild}>{formData.teacher.faculty}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={styles.heading}>Submitted By</p>
+        <table style={{ ...styles.table, marginBottom: "40px" }}>
+          <tbody>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Name</td>
+              <td style={styles.tdSecondChild}>{formData.student.name}</td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Batch</td>
+              <td style={styles.tdSecondChild}>{formData.student.batch}</td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>Section</td>
+              <td style={styles.tdSecondChild}>{formData.student.section}</td>
+            </tr>
+            <tr style={styles.tr}>
+              <td style={styles.tdFirstChild}>ID</td>
+              <td style={styles.tdSecondChild}>{formData.student.id}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={styles.heading}>
+          Submission Date:
+          {new Date(formData.date)
+            .toISOString()
+            .split("T")[0]
+            .replace(/\//g, "-")}
+        </p>
+      </div>
     </div>
   );
 };
