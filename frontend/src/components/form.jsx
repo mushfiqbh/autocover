@@ -61,6 +61,7 @@ const Form = ({ setPage }) => {
               }
               value={formData.title}
               onChange={(e) => handleChange(e, "")}
+              required
             />
             <input
               type="date"
@@ -68,6 +69,7 @@ const Form = ({ setPage }) => {
               placeholder="Assignment Date"
               value={formData.date}
               onChange={(e) => handleChange(e, "")}
+              required
             />
           </fieldset>
 
@@ -79,6 +81,7 @@ const Form = ({ setPage }) => {
               placeholder="Course Code"
               value={formData.course.code}
               onChange={(e) => handleChange(e, "course")}
+              required
             />
             <input
               type="text"
@@ -86,6 +89,7 @@ const Form = ({ setPage }) => {
               placeholder="Course Title"
               value={formData.course.title}
               onChange={(e) => handleChange(e, "course")}
+              required
             />
           </fieldset>
 
@@ -97,6 +101,7 @@ const Form = ({ setPage }) => {
               placeholder="Teacher Name"
               value={formData.teacher.name}
               onChange={(e) => handleChange(e, "teacher")}
+              required
             />
 
             <select
@@ -104,6 +109,7 @@ const Form = ({ setPage }) => {
               placeholder="Designation"
               value={formData.teacher.designation}
               onChange={(e) => handleChange(e, "teacher")}
+              required
             >
               {designations.map((designation, index) => (
                 <option key={index} value={designation}>
@@ -117,6 +123,7 @@ const Form = ({ setPage }) => {
               placeholder="Faculty"
               value={formData.teacher.faculty}
               onChange={(e) => handleChange(e, "teacher")}
+              required
             >
               {faculties.map((faculty, index) => (
                 <option key={index} value={faculty.code}>
@@ -135,6 +142,7 @@ const Form = ({ setPage }) => {
               placeholder="Student ID"
               value={formData.student.id}
               onChange={(e) => handleChange(e, "student")}
+              required
             />
             <input
               type="text"
@@ -142,6 +150,7 @@ const Form = ({ setPage }) => {
               placeholder="Student Name"
               value={formData.student.name}
               onChange={(e) => handleChange(e, "student")}
+              required
             />
             <input
               type="text"
@@ -149,20 +158,20 @@ const Form = ({ setPage }) => {
               placeholder="Batch"
               value={formData.student.batch}
               onChange={(e) => handleChange(e, "student")}
+              required
             />
             <select
               name="section"
-              placeholder="Section"
+              placeholder="Select Section"
               value={formData.student.section}
               onChange={(e) => handleChange(e, "student")}
+              required
             >
-              {["Select Section"]
-                .concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""))
-                .map((sec, index) => (
-                  <option key={index} value={sec}>
-                    {sec}
-                  </option>
-                ))}
+              {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((sec, index) => (
+                <option key={index} value={sec}>
+                  {sec}
+                </option>
+              ))}
             </select>
 
             <select
@@ -170,6 +179,7 @@ const Form = ({ setPage }) => {
               placeholder="Department"
               value={formData.student.dept}
               onChange={(e) => handleChange(e, "student")}
+              required
             >
               {faculties.map((faculty, index) => (
                 <option key={index} value={faculty.name}>

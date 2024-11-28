@@ -11,52 +11,53 @@ const Builder = ({ setPage }) => {
   const [show, setShow] = useState(false);
 
   return (
-    <div
-      style={{
-        margin: "20px",
-        display: "flex",
-        flexDirection: "column",
-        rowGap: "20px",
-        alignItems: "center",
-      }}
-    >
-      <div style={{ margin: "50px 0" }}>
+    <div style={{ margin: 0 }}>
+      <div
+        style={{
+          margin: "20px",
+          display: "flex",
+          flexDirection: "column",
+          rowGap: "20px",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ margin: "50px 0" }}>
+          <button
+            onClick={() => {
+              formData.type === "assignment"
+                ? generateAssignment(formData)
+                : generateLabReport(formData);
+            }}
+          >
+            Download Your PDF
+          </button>
+        </div>
+
+        <h3
+          style={{
+            color: "slateblue",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+          onClick={() => setPage("form")}
+        >
+          Edit / Create Another{" "}
+          {formData.type === "assignment" ? "Assignment" : "Lab Report"}
+        </h3>
+
+        <i style={{ color: "red" }}>
+          Preview of the cover page may not be actually represented here
+        </i>
+
         <button
+          style={{ width: "200px" }}
           onClick={() => {
-            formData.type === "assignment"
-              ? generateAssignment(formData)
-              : generateLabReport(formData);
+            setShow(!show);
           }}
         >
-          Download Your PDF
+          {show ? "Hide Preview" : "Show Preview"}
         </button>
       </div>
-
-      <h3
-        style={{
-          color: "slateblue",
-          cursor: "pointer",
-          textDecoration: "underline",
-        }}
-        onClick={() => setPage("form")}
-      >
-        Create Another{" "}
-        {formData.type === "assignment" ? "Assignment" : "Lab Report"} Cover
-        Page
-      </h3>
-
-      <i style={{ color: "red" }}>
-        Preview of the cover page may not be actually represented here
-      </i>
-
-      <button
-        style={{ width: "200px" }}
-        onClick={() => {
-          setShow(!show);
-        }}
-      >
-        {show ? "Hide Preview" : "Show Preview"}
-      </button>
 
       {show && formData.type === "assignment" && <Assignment />}
       {show && formData.type === "labreport" && <LabReport />}

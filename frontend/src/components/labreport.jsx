@@ -6,7 +6,7 @@ const LabReport = () => {
 
   const styles = {
     page: {
-      width: "80%",
+      width: "99%",
       color: "#1A1A1A",
       backgroundColor: "#fff",
       border: "1px dashed teal",

@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>LU AutoCoverPageGenerator</h2>
+      <h2 onClick={() => setPage("")}>LU AutoCoverPageGenerator</h2>
 
       <div className="navbar">
         <b className="anchor" onClick={() => setPage("")}>

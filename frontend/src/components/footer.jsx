@@ -1,5 +1,5 @@
 import "../styles/footer.css";
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -8,12 +8,13 @@ const Footer = () => {
         <div className="cta-text">
           <h2>Ready for a next project?</h2>
         </div>
-        <button className="cta-button">Contact Us</button>
+        <button className="cta-button">Contact</button>
       </div>
 
       <div className="footer-content">
         <div className="footer-column">
           <h4>TESSERACT Inc.</h4>
+          <p>Copyright &copy; {new Date().getFullYear()}</p>
         </div>
         <div className="footer-column">
           <h4>Features</h4>
@@ -52,18 +53,18 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-column">
-          <h4>Follow us</h4>
+          <h4>Follow Developer On</h4>
           <div className="social-icons">
-            <a>
+            <a href="https://www.facebook.com/mushfiqbh" target="_blank">
               <FaFacebook />
             </a>
-            <a>
-              <FaInstagram />
+            <a href="https://www.youtube.com/@tesseractbd" target="_blank">
+              <FaYoutube />
             </a>
-            <a>
+            <a href="https://twitter.com/mushfiqbh" target="_blank">
               <FaTwitter />
             </a>
-            <a>
+            <a href="https://www.linkedin.com/in/mushfiqbh" target="_blank">
               <FaLinkedin />
             </a>
           </div>
