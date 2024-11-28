@@ -190,23 +190,6 @@ const Home = () => {
 
     // Save the PDF
     doc.save("assignment_result.pdf");
-
-    // const docs = document.querySelector(".docs");
-    // html2canvas(docs, {
-    //   width: docs.scrollWidth,
-    //   height: docs.scrollHeight,
-    // }).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const doc = new jsPDF({
-    //     orientation: "portrait",
-    //     unit: "px",
-    //     format: [canvas.width, canvas.height],
-    //   });
-    //   const imgWidth = canvas.width;
-    //   const imgHeight = canvas.height;
-    //   doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    //   doc.save("a4.pdf");
-    // });
   };
 
   return (
