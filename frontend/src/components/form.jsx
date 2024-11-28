@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { faculties, designations } from "../assets/data";
 import { useContext } from "react";
 import { FormContext } from "../lib/contextAPI";
 import "../styles/form.css";
+import PropTypes from "prop-types";
 
-const Form = () => {
-  const navigate = useNavigate();
+const Form = ({ setPage }) => {
   const { formData, setFormData } = useContext(FormContext);
 
   const handleChange = (ev, where) => {
@@ -26,20 +25,24 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     localStorage.setItem("student", JSON.stringify(formData.student));
-    navigate("/builder");
+    setPage("builder");
   };
 
   return (
     <div className="assignment">
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label>Assignment Title & Date</label>
+          <label>
+            {formData.type === "assignment" ? "Assignment" : "Lab Report"} Title
+            & Date
+          </label>
           <input
             type="text"
             name="title"
-            placeholder="Assignment Title"
+            placeholder={
+              formData.type === "assignment" ? "Assignment Title" : "Lab Report Title"
+            }
             value={formData.title}
             onChange={(e) => handleChange(e, "")}
           />
@@ -165,4 +168,7 @@ const Form = () => {
   );
 };
 
+Form.propTypes = {
+  setPage: PropTypes.func.isRequired,
+};
 export default Form;

@@ -7,12 +7,15 @@ const Builder = () => {
 
   const styles = {
     page: {
+      width: "80%",
       color: "#1A1A1A",
       backgroundColor: "#fff",
+      border: "1px dashed teal",
+      margin: "20px auto",
       fontSize: "20px",
       paddingTop: "6rem",
       textAlign: "center",
-      fontFamily: "Calibri, Geist-Sans, serif",
+      fontFamily: "Helvetica, sans-serif",
     },
     section: {
       margin: "80px 0",
@@ -38,13 +41,12 @@ const Builder = () => {
     },
     tdSecondChild: {
       width: "60%",
-      textAlign: "center",
+      textAlign: "left",
       paddingLeft: "1.5rem",
       paddingRight: "10rem",
     },
     heading: {
       textAlign: "center",
-      fontFamily: "Calibri-Bold",
       fontWeight: "bold",
       fontSize: "20px",
     },
@@ -57,9 +59,9 @@ const Builder = () => {
   return (
     <div>
       <div>
-        <button onClick={() => generatePDF(formData)}>Print</button>
+        <button onClick={() => generatePDF(formData)}>Download PDF</button>
       </div>
-      <div style={styles.page} className="docs">
+      <div style={styles.page} id="preview">
         <div style={styles.section}>
           <img
             style={styles.image}
@@ -128,12 +130,13 @@ const Builder = () => {
           </tbody>
         </table>
         <p style={styles.heading}>
-          Submission Date:
+          Submission Date:{" "}
           {new Date(formData.date)
             .toISOString()
             .split("T")[0]
             .replace(/\//g, "-")}
         </p>
+        <div style={styles.section}></div>
       </div>
     </div>
   );

@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 
 const FormContextProvider = (props) => {
   const [formData, setFormData] = useState({
+    type: "",
+    title: "",
+    date: new Date().toISOString().split("T")[0],
     course: {
       code: "",
       title: "",
@@ -20,8 +23,6 @@ const FormContextProvider = (props) => {
       section: "",
       dept: "Computer Science And Engineering",
     },
-    date: new Date().toISOString().split("T")[0],
-    title: "",
   });
 
   useEffect(() => {

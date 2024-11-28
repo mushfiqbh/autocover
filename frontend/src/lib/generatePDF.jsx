@@ -20,10 +20,10 @@ const generatePDF = (data) => {
   doc.addImage(imageURL, "JPEG", (pageWidth - 40) / 2, 25, 40, 40);
 
   // Title and Department
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(24);
   doc.text("Leading University", pageWidth / 2, 75, "center");
-  doc.setFontSize(16);
+  doc.setFontSize(20);
   doc.text(data.student.dept, pageWidth / 2, 85, "center");
 
   // Course Information Table
@@ -37,7 +37,6 @@ const generatePDF = (data) => {
   ];
   let courseInfoEnd = courseInfo.length;
 
-  doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
   let inc = 0;
 
@@ -51,11 +50,13 @@ const generatePDF = (data) => {
       inc = 1;
     }
 
+    doc.setFont("helvetica", "normal");
     wrappedText.forEach((line, lineIndex) => {
-      doc.text(line, 90, y + lineIndex * rowHeight);
+      doc.text(line, 100, y + lineIndex * rowHeight);
     });
 
-    doc.text(row[0], 50, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(row[0], 60, y);
   });
 
   // Submitted To Section
@@ -73,11 +74,14 @@ const generatePDF = (data) => {
     ["Faculty", "Dept. of " + data.teacher.faculty],
   ];
 
-  doc.setFont("helvetica", "normal");
   teacherInfo.forEach((row, index) => {
     const y =
       yPosition + courseInfoEnd * rowHeight + 25 + (index + 1) * rowHeight;
+
+    doc.setFont("helvetica", "bold");
     doc.text(row[0], 70, y);
+
+    doc.setFont("helvetica", "normal");
     doc.text(row[1], 100, y);
   });
 
@@ -105,7 +109,11 @@ const generatePDF = (data) => {
       teacherInfo.length * rowHeight +
       40 +
       (index + 1) * rowHeight;
+
+    doc.setFont("helvetica", "bold");
     doc.text(row[0], 70, y + 10);
+
+    doc.setFont("helvetica", "normal");
     doc.text(row[1], 100, y + 10);
   });
 
@@ -128,7 +136,7 @@ const generatePDF = (data) => {
 
   // Save the PDF
   doc.save(
-    data.course.code + "_" + data.date + "(" + data.title + ")" + ".pdf"
+    data.course.code + "_" + data.date + " (" + data.title + ")" + ".pdf"
   );
   doc.close();
 };
