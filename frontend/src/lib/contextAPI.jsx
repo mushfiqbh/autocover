@@ -5,8 +5,8 @@ export const ContextAPI = createContext(null);
 const ContextAPIProvider = (props) => {
   const [formData, setFormData] = useState({
     course: {
-      code: "EEE-2111",
-      title: "Electrconic Devices And Circuits",
+      code: "EEE-2112",
+      title: "Electrconic Devices And Circuits And Sessional",
     },
     teacher: {
       name: "Bidyut Kanthi Nath",
@@ -20,8 +20,9 @@ const ContextAPIProvider = (props) => {
       section: "G",
       dept: "Computer Science And Engineering",
     },
+    number: "1",
     date: new Date().toISOString().split("T")[0],
-    title: "Characteristics of Transistors",
+    title: "Assignment on Characteristics of Transistors and Diodes in Semiconductors",
   });
 
   const contextValue = {

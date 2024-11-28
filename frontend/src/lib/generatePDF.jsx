@@ -7,7 +7,7 @@ const generatePDF = (data) => {
     format: "a4",
   });
 
-  // Set document properties (optional)
+  // Set document properties
   doc.setProperties({
     title: data.title,
   });
@@ -17,38 +17,53 @@ const generatePDF = (data) => {
 
   // Leading University Logo
   const imageURL = "https://i.ibb.co.com/cYMTmCT/Leading-University-Logo.png";
-  doc.addImage(imageURL, "JPEG", (pageWidth - 40) / 2, 10, 40, 42);
+  doc.addImage(imageURL, "JPEG", (pageWidth - 40) / 2, 25, 40, 40);
 
   // Title and Department
-  doc.setFont("times", "bold");
-  doc.setFontSize(25);
-  doc.text("Leading University", pageWidth / 2, 75, "center");
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
+  doc.text("Leading University", pageWidth / 2, 75, "center");
+  doc.setFontSize(16);
   doc.text(data.student.dept, pageWidth / 2, 85, "center");
 
   // Course Information Table
   const yPosition = 100; // Starting position for table
-  const rowHeight = 10; // Adjust row height as needed
+  const rowHeight = 7; // Adjust row height as needed
 
   const courseInfo = [
     ["Course Code", data.course.code],
     ["Course Title", data.course.title],
-    ["Assignment Title", data.title],
+    ["Assignment Title", data.title + " (" + data.number + ")"],
   ];
+  let courseInfoEnd = courseInfo.length;
 
-  doc.setFont("times", "normal");
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+  let inc = 0;
+
   courseInfo.forEach((row, index) => {
-    const y = yPosition + (index + 1) * rowHeight;
+    const y = yPosition + (index + 1 + inc) * rowHeight;
+
+    let wrappedText = doc.splitTextToSize(row[1], 100);
+    courseInfoEnd += wrappedText.length - 1;
+
+    if (row[0] == "Course Title" && wrappedText.length > 1) {
+      inc = 1;
+    }
+
+    wrappedText.forEach((line, lineIndex) => {
+      doc.text(line, 90, y + lineIndex * rowHeight);
+    });
+
     doc.text(row[0], 50, y);
-    doc.text(row[1], 100, y);
   });
 
   // Submitted To Section
-  doc.setFont("times", "bold");
+  doc.setFont("helvetica", "bold");
   doc.text(
     "Submitted To",
     pageWidth / 2,
-    yPosition + courseInfo.length * rowHeight + 20,
+    yPosition + courseInfoEnd * rowHeight + 25,
     "center"
   );
 
@@ -58,23 +73,20 @@ const generatePDF = (data) => {
     ["Faculty", data.teacher.faculty],
   ];
 
-  doc.setFont("times", "normal");
+  doc.setFont("helvetica", "normal");
   teacherInfo.forEach((row, index) => {
     const y =
-      yPosition + courseInfo.length * rowHeight + 20 + (index + 1) * rowHeight;
-    doc.text(row[0], 50, y);
+      yPosition + courseInfoEnd * rowHeight + 25 + (index + 1) * rowHeight;
+    doc.text(row[0], 70, y);
     doc.text(row[1], 100, y);
   });
 
   // Submitted By Section
-  doc.setFont("times", "bold");
+  doc.setFont("helvetica", "bold");
   doc.text(
     "Submitted By",
     pageWidth / 2,
-    yPosition +
-      courseInfo.length * rowHeight +
-      teacherInfo.length * rowHeight +
-      40,
+    yPosition + courseInfoEnd * rowHeight + teacherInfo.length * rowHeight + 50,
     "center"
   );
 
@@ -85,20 +97,20 @@ const generatePDF = (data) => {
     ["ID", data.student.id],
   ];
 
-  doc.setFont("times", "normal");
+  doc.setFont("helvetica", "normal");
   studentInfo.forEach((row, index) => {
     const y =
       yPosition +
-      courseInfo.length * rowHeight +
+      courseInfoEnd * rowHeight +
       teacherInfo.length * rowHeight +
       40 +
       (index + 1) * rowHeight;
-    doc.text(row[0], 50, y);
-    doc.text(row[1], 100, y);
+    doc.text(row[0], 70, y + 10);
+    doc.text(row[1], 100, y + 10);
   });
 
   // Submission Date
-  doc.setFont("times", "bold");
+  doc.setFont("helvetica", "bold");
   const submissionDate = new Date(data.date)
     .toISOString()
     .split("T")[0]
@@ -107,15 +119,18 @@ const generatePDF = (data) => {
     `Submission Date: ${submissionDate}`,
     pageWidth / 2,
     yPosition +
-      courseInfo.length * rowHeight +
+      courseInfoEnd * rowHeight +
       teacherInfo.length * rowHeight +
       studentInfo.length * rowHeight +
-      60,
+      70,
     "center"
   );
 
   // Save the PDF
-  doc.save(data.course.code + "_" + data.date + ".pdf");
+  doc.save(
+    data.course.code + "_" + data.date + "(" + data.title + ")" + ".pdf"
+  );
+  doc.close();
 };
 
 export default generatePDF;
