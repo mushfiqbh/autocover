@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 
-const generatePDF = (data) => {
+const generateAssignment = (data) => {
   const doc = new jsPDF({
     orientation: "portrait",
     unit: "mm",
@@ -136,9 +136,9 @@ const generatePDF = (data) => {
 
   // Save the PDF
   doc.save(
-    data.course.code + "_" + data.date + " (" + data.title + ")" + ".pdf"
+    "A-" + data.course.code + "_" + data.date + " (" + data.title + ")" + ".pdf"
   );
   doc.close();
 };
 
-export default generatePDF;
+export default generateAssignment;

@@ -1,145 +1,71 @@
-import { useContext } from "react";
-import generatePDF from "../lib/generatePDF";
+import { useState, useContext } from "react";
+import generateAssignment from "../lib/generateAssignment";
+import generateLabReport from "../lib/generateLabReport";
 import { FormContext } from "../lib/contextAPI";
+import Assignment from "./assignment";
+import LabReport from "./labreport";
+import PropTypes from "prop-types";
 
-const Builder = () => {
+const Builder = ({ setPage }) => {
   const { formData } = useContext(FormContext);
-
-  const styles = {
-    page: {
-      width: "80%",
-      color: "#1A1A1A",
-      backgroundColor: "#fff",
-      border: "1px dashed teal",
-      margin: "20px auto",
-      fontSize: "20px",
-      paddingTop: "6rem",
-      textAlign: "center",
-      fontFamily: "Helvetica, sans-serif",
-    },
-    section: {
-      margin: "80px 0",
-      textAlign: "center",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      rowGap: "5px",
-    },
-    table: {
-      width: "100%",
-      marginBottom: "100px",
-      borderCollapse: "separate",
-      borderSpacing: "0 10px",
-    },
-    tr: {
-      width: "100%",
-    },
-    tdFirstChild: {
-      width: "40%",
-      fontWeight: "bold",
-      textAlign: "right",
-    },
-    tdSecondChild: {
-      width: "60%",
-      textAlign: "left",
-      paddingLeft: "1.5rem",
-      paddingRight: "10rem",
-    },
-    heading: {
-      textAlign: "center",
-      fontWeight: "bold",
-      fontSize: "20px",
-    },
-    image: {
-      width: "160px",
-      height: "160px",
-    },
-  };
+  const [show, setShow] = useState(false);
 
   return (
-    <div>
-      <div>
-        <button onClick={() => generatePDF(formData)}>Download PDF</button>
+    <div
+      style={{
+        margin: "20px",
+        display: "flex",
+        flexDirection: "column",
+        rowGap: "20px",
+        alignItems: "center",
+      }}
+    >
+      <div style={{ margin: "50px 0" }}>
+        <button
+          onClick={() => {
+            formData.type === "assignment"
+              ? generateAssignment(formData)
+              : generateLabReport(formData);
+          }}
+        >
+          Download Your PDF
+        </button>
       </div>
-      <div style={styles.page} id="preview">
-        <div style={styles.section}>
-          <img
-            style={styles.image}
-            src="https://i.ibb.co.com/cYMTmCT/Leading-University-Logo.png"
-            alt="Leading University Logo"
-          />
-          <p style={{ fontSize: "2rem", marginTop: "10px" }}>
-            Leading University
-          </p>
-          <p style={{ fontSize: "1.8rem" }}>{formData.student.dept}</p>
-        </div>
-        <table style={styles.table}>
-          <tbody>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Course Code</td>
-              <td style={styles.tdSecondChild}>{formData.course.code}</td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Course Title</td>
-              <td style={styles.tdSecondChild}>{formData.course.title}</td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Assignment Title</td>
-              <td style={styles.tdSecondChild}>{formData.title}</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={styles.heading}>Submitted To</p>
-        <table style={styles.table}>
-          <tbody>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Name</td>
-              <td style={styles.tdSecondChild}>{formData.teacher.name}</td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Designation</td>
-              <td style={styles.tdSecondChild}>
-                {formData.teacher.designation}
-              </td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Faculty</td>
-              <td style={styles.tdSecondChild}>{formData.teacher.faculty}</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={styles.heading}>Submitted By</p>
-        <table style={{ ...styles.table, marginBottom: "40px" }}>
-          <tbody>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Name</td>
-              <td style={styles.tdSecondChild}>{formData.student.name}</td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Batch</td>
-              <td style={styles.tdSecondChild}>{formData.student.batch}</td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>Section</td>
-              <td style={styles.tdSecondChild}>{formData.student.section}</td>
-            </tr>
-            <tr style={styles.tr}>
-              <td style={styles.tdFirstChild}>ID</td>
-              <td style={styles.tdSecondChild}>{formData.student.id}</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={styles.heading}>
-          Submission Date:{" "}
-          {new Date(formData.date)
-            .toISOString()
-            .split("T")[0]
-            .replace(/\//g, "-")}
-        </p>
-        <div style={styles.section}></div>
-      </div>
+
+      <h3
+        style={{
+          color: "slateblue",
+          cursor: "pointer",
+          textDecoration: "underline",
+        }}
+        onClick={() => setPage("form")}
+      >
+        Create Another{" "}
+        {formData.type === "assignment" ? "Assignment" : "Lab Report"} Cover
+        Page
+      </h3>
+
+      <i style={{ color: "red" }}>
+        Preview of the cover page may not be actually represented here
+      </i>
+
+      <button
+        style={{ width: "200px" }}
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        {show ? "Hide Preview" : "Show Preview"}
+      </button>
+
+      {show && formData.type === "assignment" && <Assignment />}
+      {show && formData.type === "labreport" && <LabReport />}
     </div>
   );
+};
+
+Builder.propTypes = {
+  setPage: PropTypes.func.isRequired,
 };
 
 export default Builder;

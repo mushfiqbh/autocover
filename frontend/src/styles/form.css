@@ -5,9 +5,13 @@
 }
 
 form {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding-bottom: 50px;
+}
+
+.column {
+  width: 100%;
 }
 
 fieldset {
@@ -37,17 +41,33 @@ select {
 }
 
 button {
-  padding: 10px 20px;
-  border: none;
+  color: teal;
+  height: 50px;
+  background-color: transparent;
+  border: 2px solid teal;
   border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 16px;
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+button:hover {
+  color: white;
+  background-color: teal;
+}
+
+@media screen and (min-width: 768px) {
   form {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .column {
+    width: 30%;
   }
 }

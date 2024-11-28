@@ -1,3 +1,18 @@
+export const designations = [
+  "Lecturer",
+  "Adjunct Lecturer",
+  "Part Time Lecturer",
+  "Instructor",
+  "Professor",
+  "Adjunct Faculty",
+  "Adjunct Professor",
+  "Assistant Professor",
+  "Adjunct Assistant Professor",
+  "Associate Professor",
+  "Clinical Professor",
+  "Department Head",
+];
+
 export const faculties = [
   {
     code: "CSE",
@@ -66,34 +81,4 @@ export const courses = [
     code: "CSE-2112",
     title: "Data Structures And Sessional",
   },
-];
-
-export const teachers = [
-  {
-    code: "DCP",
-    name: "Dipto Chandra Paul",
-    faculty: "CSE",
-    designation: "Lecturer",
-  },
-  {
-    code: "BKN",
-    name: "Bidyut Kanthi Nath",
-    faculty: "EEE",
-    designation: "Lecturer",
-  },
-];
-
-export const designations = [
-  "Lecturer",
-  "Adjunct Lecturer",
-  "Part Time Lecturer",
-  "Instructor",
-  "Professor",
-  "Adjunct Faculty",
-  "Adjunct Professor",
-  "Assistant Professor",
-  "Adjunct Assistant Professor",
-  "Associate Professor",
-  "Clinical Professor",
-  "Department Head",
 ];
