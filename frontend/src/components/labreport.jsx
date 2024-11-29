@@ -34,17 +34,24 @@ const LabReport = () => {
       width: "100%",
     },
     tdFirstChild: {
-      width: "40%",
+      width: "45%",
       fontWeight: "bold",
       textAlign: "right",
     },
     tdSecondChild: {
-      width: "60%",
+      width: "55%",
       textAlign: "left",
       paddingLeft: "1.5rem",
       paddingRight: "10rem",
     },
+    title: {
+      color: "purple",
+      textAlign: "center",
+      fontWeight: "bold",
+      fontSize: "25px",
+    },
     heading: {
+      color: "purple",
       textAlign: "center",
       fontWeight: "bold",
       fontSize: "20px",
@@ -68,6 +75,7 @@ const LabReport = () => {
         </p>
         <p style={{ fontSize: "1.8rem" }}>{formData.student.dept}</p>
       </div>
+      <p style={styles.title}>{formData.title}</p>
       <table style={styles.table}>
         <tbody>
           <tr style={styles.tr}>
@@ -78,31 +86,17 @@ const LabReport = () => {
             <td style={styles.tdFirstChild}>Course Title</td>
             <td style={styles.tdSecondChild}>{formData.course.title}</td>
           </tr>
-          <tr style={styles.tr}>
-            <td style={styles.tdFirstChild}>Assignment Title</td>
-            <td style={styles.tdSecondChild}>{formData.title}</td>
-          </tr>
         </tbody>
       </table>
       <p style={styles.heading}>Submitted To</p>
-      <table style={styles.table}>
-        <tbody>
-          <tr style={styles.tr}>
-            <td style={styles.tdFirstChild}>Name</td>
-            <td style={styles.tdSecondChild}>{formData.teacher.name}</td>
-          </tr>
-          <tr style={styles.tr}>
-            <td style={styles.tdFirstChild}>Designation</td>
-            <td style={styles.tdSecondChild}>{formData.teacher.designation}</td>
-          </tr>
-          <tr style={styles.tr}>
-            <td style={styles.tdFirstChild}>Faculty</td>
-            <td style={styles.tdSecondChild}>
-              {"Dept. of " + formData.teacher.faculty}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div style={{ marginBottom: "40px" }}>
+        <br />
+        <b>{formData.teacher.name}</b>
+        <br />
+        <br />
+        <p>{formData.teacher.designation}</p>
+        <p>Department of {formData.teacher.faculty}</p>
+      </div>
       <p style={styles.heading}>Submitted By</p>
       <table style={{ ...styles.table, marginBottom: "40px" }}>
         <tbody>

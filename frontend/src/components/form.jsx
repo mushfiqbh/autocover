@@ -7,9 +7,19 @@ import PropTypes from "prop-types";
 const Form = ({ setPage }) => {
   const { formData, setFormData } = useContext(FormContext);
 
+  const toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  };
+
   const handleChange = (ev, where) => {
     const name = ev.target.name;
-    const value = ev.target.value;
+    let value = ev.target.value;
+
+    if (name === "title") {
+      value = toTitleCase(value);
+    }
 
     setFormData((prevFormData) => {
       if (where === "") {
@@ -44,7 +54,7 @@ const Form = ({ setPage }) => {
 
   return (
     <div className="assignment">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="input-form">
         <div className="column">
           <fieldset>
             <label>

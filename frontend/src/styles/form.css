@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-form {
+form#input-form {
   width: 100%;
   margin: 0 auto;
   padding-bottom: 50px;
@@ -34,17 +34,23 @@ label {
 
 input,
 select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
 }
 
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #0077cc;
+}
+
 button {
-  color: teal;
+  color: slategrey;
   height: 50px;
-  background-color: transparent;
-  border: 2px solid teal;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
@@ -52,11 +58,13 @@ button {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  transition-duration: 0.4s;
+  border: none;
 }
 
 button:hover {
   color: white;
-  background-color: teal;
+  background-color: #3a3a5e;
 }
 
 @media screen and (min-width: 768px) {

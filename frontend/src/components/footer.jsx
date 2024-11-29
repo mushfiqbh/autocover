@@ -1,14 +1,22 @@
+import { useState } from "react";
+import ContactForm from "./contactForm";
 import "../styles/footer.css";
 import { FaFacebook, FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <footer>
+      {show && <ContactForm setShow={setShow} />}
+
       <div className="cta-section">
         <div className="cta-text">
           <h2>Ready for a next project?</h2>
         </div>
-        <button className="cta-button">Contact</button>
+        <button className="cta-button" onClick={() => setShow(!show)}>
+          Contact
+        </button>
       </div>
 
       <div className="footer-content">

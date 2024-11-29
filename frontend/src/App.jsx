@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2 onClick={() => setPage("")}>LU AutoCoverPageGenerator</h2>
+      <h2 onClick={() => setPage("")}>LU AutoFrontPageGenerator</h2>
 
       <div className="navbar">
         <b className="anchor" onClick={() => setPage("")}>
@@ -46,7 +46,7 @@ function App() {
               setPage("form");
             }}
           >
-            Create Assignment Cover Page
+            Create Assignment Front Page
           </b>
           <br />
           <b
@@ -58,7 +58,7 @@ function App() {
               setPage("form");
             }}
           >
-            Create Lab Report Cover Page
+            Create Lab Report Front Page
           </b>
         </div>
       )}
